@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Signature Architectural Blueprint Background */
+.blueprint-canvas {
+  background-color: #123060;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+  position: relative;
+}
+
+/* Blueprint Sketch / Drafted Lettering Effect */
+.blueprint-sketch-text {
+  font-family: 'Courier New', 'JetBrains Mono', monospace;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.18em;
+  text-shadow: 
+    0 0 1px rgba(255, 255, 255, 0.9),
+    1px 1px 0px rgba(56, 189, 248, 0.4),
+    -1px -1px 0px rgba(255, 255, 255, 0.3);
+  position: relative;
+  display: inline-block;
+}
+
+/* Crosshatch texture for blueprint text */
+.blueprint-crosshatch {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.95) 2px,
+    rgba(255, 255, 255, 0.5) 2px,
+    rgba(255, 255, 255, 0.5) 4px
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Engineering Drafting Lines */
+.draft-line {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.draft-line-h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.draft-line-dashed {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.4) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Subtle Card Glow */
+.tech-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -8px rgba(15, 43, 92, 0.12);
+}
