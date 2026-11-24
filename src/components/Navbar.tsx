@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { personalProfile } from '../data/portfolioData';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,17 +31,7 @@ export const Navbar: React.FC = () => {
       role="banner"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Brand Logo / Name */}
-          <a
-            href="#home"
-            className="flex items-center space-x-2 text-white font-mono tracking-[0.2em] text-sm font-bold hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded px-1"
-            aria-label={`${personalProfile.name} Portfolio Home`}
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
-            <span>{personalProfile.name}</span>
-          </a>
-
+        <div className="flex items-center justify-end h-16">
           {/* Desktop Navigation */}
           <nav
             className="hidden md:flex items-center space-x-8 text-xs font-semibold tracking-widest text-slate-300"
