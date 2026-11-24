@@ -56,6 +56,24 @@ export const experiences: ExperienceItem[] = [
 
 export const projects: ProjectItem[] = [
   {
+    id: 'attendance-log-system',
+    title: 'Attendance Log System (ALS)',
+    subtitle: 'Workforce Attendance, Geofenced Tracking & Payroll Platform',
+    category: 'Full-Stack & .NET',
+    organization: 'Enterprise Solution Showcase',
+    description:
+      'A comprehensive workforce attendance and payroll management portal featuring real-time geofenced check-ins, interactive GPS map tracking, automated leave & loan approval workflows, salary slip generation, and executive analytics.',
+    highlights: [
+      'Interactive executive dashboard displaying live attendance headcounts, departmental status, and payroll metrics.',
+      'Geofenced mobile check-in tracking with Leaflet.js GPS map visualization and real-time verification.',
+      'Automated leave application engine, loan management, and printable salary slip generation.'
+    ],
+    technologies: ['JavaScript (ES6+)', 'Tailwind CSS', 'Leaflet.js', 'REST APIs', 'Geolocation API', 'Payroll Engine', 'HTML5'],
+    featured: true,
+    liveUrl: 'https://sajjadali4441-web.github.io/attendance-log-system-portfolio/',
+    linkText: 'Live Project Demo'
+  },
+  {
     id: 'pkmp',
     title: 'Product Knowledge Measurement Portal (PKMP)',
     subtitle: 'Full-Stack Banking Application',

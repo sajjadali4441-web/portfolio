@@ -36,6 +36,8 @@ export interface ProjectItem {
   highlights: string[];
   technologies: string[];
   featured: boolean;
+  liveUrl?: string;
+  githubUrl?: string;
   linkText?: string;
 }
 

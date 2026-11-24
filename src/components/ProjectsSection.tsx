@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Building2 } from 'lucide-react';
+import { Check, Building2, ExternalLink } from 'lucide-react';
 import { projects } from '../data/portfolioData';
 
 type CategoryFilter = 'All' | 'Full-Stack & .NET' | 'Power Platform' | 'SharePoint';
@@ -136,12 +136,42 @@ export const ProjectsSection: React.FC = () => {
                 </div>
 
                 {/* Title & Subtitle */}
-                <h3 className="text-xl font-bold text-slate-900 tracking-tight group-hover:text-blue-900 transition-colors">
-                  {project.title}
-                </h3>
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/title inline-flex items-center gap-2 text-xl font-bold text-blue-700 hover:text-blue-900 transition-colors"
+                    title={`Open ${project.title} live project`}
+                  >
+                    <span className="underline decoration-blue-300 hover:decoration-blue-700 underline-offset-4">
+                      {project.title}
+                    </span>
+                    <ExternalLink size={18} className="text-blue-600 group-hover/title:translate-x-0.5 group-hover/title:-translate-y-0.5 transition-transform" />
+                  </a>
+                ) : (
+                  <h3 className="text-xl font-bold text-slate-900 tracking-tight">
+                    {project.title}
+                  </h3>
+                )}
+
                 <div className="text-xs font-mono font-medium text-blue-900 mt-1">
                   {project.subtitle}
                 </div>
+
+                {project.liveUrl && (
+                  <div className="mt-2.5">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all shadow-sm"
+                    >
+                      <span>View Live Project</span>
+                      <ExternalLink size={12} />
+                    </a>
+                  </div>
+                )}
 
                 {/* Description */}
                 <p className="text-slate-600 text-sm leading-relaxed mt-4">
@@ -150,6 +180,9 @@ export const ProjectsSection: React.FC = () => {
 
                 {/* Highlights */}
                 <div className="mt-5 space-y-2">
+                  <div className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+                    Key Features & Architecture:
+                  </div>
                   <ul className="space-y-2">
                     {project.highlights.map((highlight, idx) => (
                       <li key={idx} className="flex items-start space-x-2 text-xs text-slate-700">
@@ -161,18 +194,35 @@ export const ProjectsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Technologies Footer */}
-              <div className="mt-6 pt-5 border-t border-slate-100">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {/* Technologies & Redirect Link Footer */}
+              <div className="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex-1">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-semibold">
+                    Detail Stack:
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline transition-colors mt-2 sm:mt-0"
+                  >
+                    <span>Launch Project</span>
+                    <ExternalLink size={13} />
+                  </a>
+                )}
               </div>
             </article>
           ))}
