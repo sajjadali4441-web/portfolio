@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Building2, ExternalLink } from 'lucide-react';
+import { Check, Building2, ExternalLink, Smartphone } from 'lucide-react';
 import { projects } from '../data/portfolioData';
 
 type CategoryFilter = 'All' | 'Full-Stack & .NET' | 'Power Platform' | 'SharePoint';
@@ -159,17 +159,31 @@ export const ProjectsSection: React.FC = () => {
                   {project.subtitle}
                 </div>
 
-                {project.liveUrl && (
-                  <div className="mt-2.5">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all shadow-sm"
-                    >
-                      <span>View Live Project</span>
-                      <ExternalLink size={12} />
-                    </a>
+                {(project.liveUrl || project.mobileUrl) && (
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all shadow-sm active:scale-95"
+                      >
+                        <span>Live Web Portal</span>
+                        <ExternalLink size={12} />
+                      </a>
+                    )}
+                    {project.mobileUrl && (
+                      <a
+                        href={project.mobileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-800 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all shadow-sm active:scale-95"
+                      >
+                        <Smartphone size={13} className="text-emerald-700" />
+                        <span>Live Mobile App (Instant)</span>
+                        <ExternalLink size={12} />
+                      </a>
+                    )}
                   </div>
                 )}
 
@@ -212,17 +226,31 @@ export const ProjectsSection: React.FC = () => {
                   </div>
                 </div>
 
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline transition-colors mt-2 sm:mt-0"
-                  >
-                    <span>Launch Project</span>
-                    <ExternalLink size={13} />
-                  </a>
-                )}
+                <div className="shrink-0 flex items-center gap-3 mt-2 sm:mt-0">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                    >
+                      <span>Web Portal</span>
+                      <ExternalLink size={13} />
+                    </a>
+                  )}
+                  {project.mobileUrl && (
+                    <a
+                      href={project.mobileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-900 hover:underline transition-colors"
+                    >
+                      <Smartphone size={13} />
+                      <span>Mobile App</span>
+                      <ExternalLink size={13} />
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}

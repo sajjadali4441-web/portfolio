@@ -71,6 +71,7 @@ export const projects: ProjectItem[] = [
     technologies: ['JavaScript (ES6+)', 'Tailwind CSS', 'Leaflet.js', 'REST APIs', 'Geolocation API', 'Payroll Engine', 'HTML5'],
     featured: true,
     liveUrl: 'https://sajjadali4441-web.github.io/attendance-log-system-portfolio/',
+    mobileUrl: 'https://sajjadali4441-web.github.io/attendance-log-system-portfolio/app.html',
     linkText: 'Live Project Demo'
   },
   {
