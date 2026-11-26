@@ -6,6 +6,7 @@ import { EmploymentSection } from './components/EmploymentSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ResumeCertificationsSection } from './components/ResumeCertificationsSection';
 import { AboutEducationSection } from './components/AboutEducationSection';
+import { CareerChatbot } from './components/CareerChatbot';
 import { personalProfile } from './data/portfolioData';
 
 export const App: React.FC = () => {
@@ -48,6 +49,9 @@ export const App: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Interactive AI Career Assistant with Welcome Popup Dialog */}
+      <CareerChatbot />
     </div>
   );
 };

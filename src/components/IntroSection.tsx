@@ -1,18 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Github, Linkedin, Phone, MapPin, FileDown, Eye } from 'lucide-react';
 import { personalProfile } from '../data/portfolioData';
 
 export const IntroSection: React.FC = () => {
+  const [laserProgress, setLaserProgress] = useState<number>(0);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    // If user prefers reduced motion, show full text immediately
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLaserProgress(100);
+      setIsComplete(true);
+      return;
+    }
+
+    // Smooth Laser Pen Draw starting 250ms after mount
+    const startTimeout = setTimeout(() => {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 1.25;
+        if (progress >= 100) {
+          setLaserProgress(100);
+          setIsComplete(true);
+          clearInterval(interval);
+        } else {
+          setLaserProgress(progress);
+        }
+      }, 20); // ~50fps buttery smooth reveal
+
+      return () => clearInterval(interval);
+    }, 250);
+
+    return () => clearTimeout(startTimeout);
+  }, []);
+
   return (
     <section
       aria-label="Professional Introduction"
       className="bg-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-100"
     >
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
-        {/* Updated Professional Introduction */}
-        <h2 className="text-lg sm:text-xl md:text-2xl text-slate-700 font-normal leading-relaxed max-w-2xl">
-          Hi, I'm <strong className="font-bold text-slate-900">Sajjad Ali</strong>, a Software Engineer passionate about building scalable applications, intelligent automation, and AI-powered solutions.
-        </h2>
+        {/* Laser Pen Draw Professional Introduction */}
+        <div className="relative max-w-2xl min-h-[4.5rem] sm:min-h-[3.75rem] flex items-center justify-center">
+          <h2
+            className="text-lg sm:text-xl md:text-2xl text-slate-700 font-normal leading-relaxed select-none transition-all"
+            style={{
+              clipPath: isComplete
+                ? 'none'
+                : `polygon(0 0, ${laserProgress}% 0, ${laserProgress}% 100%, 0 100%)`,
+            }}
+          >
+            Hi, I'm <strong className="font-bold text-slate-900">Sajjad Ali</strong>, a Software Engineer passionate about building scalable applications, intelligent automation, and AI-powered solutions.
+          </h2>
+
+          {/* Glowing Laser Pen Tip */}
+          {!isComplete && (
+            <span
+              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-10 bg-gradient-to-b from-cyan-400 via-cyan-300 to-blue-500 rounded-full blur-[1.5px] shadow-lg shadow-cyan-400 pointer-events-none transition-all duration-75"
+              style={{
+                left: `calc(${laserProgress}% - 5px)`,
+              }}
+              aria-hidden="true"
+            />
+          )}
+        </div>
 
         {/* Circular Profile Avatar (Clean, Minimalist Framing matching reference) */}
         <div className="mt-10 relative">

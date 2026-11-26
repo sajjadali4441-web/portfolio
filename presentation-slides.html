@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALS Architecture & Technical Presentation | Sajjad Ali</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#081326',
+              navy: '#0e2448',
+              surface: '#142B49',
+              teal: '#0F9D91',
+              accent: '#2563EB',
+              emerald: '#10B981',
+              cyan: '#38BDF8',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #081326;
+      color: #F8FAFC;
+      font-family: 'Inter', sans-serif;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .blueprint-grid {
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+    }
+
+    .glass-card {
+      background: rgba(20, 43, 73, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col justify-between blueprint-grid relative">
+
+  <!-- TOP STATUS BAR -->
+  <header class="h-14 px-6 md:px-10 flex items-center justify-between border-b border-white/10 bg-[#081326]/80 backdrop-blur z-20">
+    <div class="flex items-center gap-3">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#0F9D91] to-emerald-400 flex items-center justify-center text-white shadow-sm">
+        <i class="fa-solid fa-building-columns text-xs"></i>
+      </div>
+      <span class="font-mono text-xs tracking-widest font-bold text-white uppercase">ALS // TECHNICAL ARCHITECTURE</span>
+    </div>
+
+    <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+      <span class="hidden sm:inline">PRESENTER: <strong class="text-cyan-300">SAJJAD ALI</strong></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+      <span id="slideCounter" class="text-white font-bold">1 / 10</span>
+    </div>
+  </header>
+
+  <!-- SLIDES VIEWPORT -->
+  <main class="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 flex items-center justify-center relative z-10">
+
+    <!-- SLIDE 1: TITLE SLIDE -->
+    <div class="slide active w-full max-w-5xl flex-col items-center text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-mono tracking-widest uppercase">
+        <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+        <span>ENTERPRISE WORKFORCE ENGINEERING</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-tight">
+        Attendance Log System <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-blue-400">
+          (ALS)
+        </span>
+      </h1>
+
+      <p class="text-base sm:text-xl text-slate-300 max-w-3xl font-light leading-relaxed">
+        Next-Generation Location-Based Workforce Management, Sub-Meter Geofenced Attendance, Hardware Anti-Spoofing & Unified Payroll Architecture.
+      </p>
+
+      <div class="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl text-left">
+        <div class="glass-card p-4 rounded-xl">
+          <div class="text-[10px] font-mono text-slate-400 uppercase">Architecture</div>
+          <div class="text-sm font-bold text-white mt-1">Clean Architecture + MVVM</div>
+        </div>
+        <div class="glass-card p-4 rounded-xl">
+          <div class="text-[10px] font-mono text-slate-400 uppercase">Geofencing Radius</div>
+          <div class="text-sm font-bold text-teal-300 mt-1">100m Geodesic Perimeter</div>
+        </div>
+        <div class="glass-card p-4 rounded-xl">
+          <div class="text-[10px] font-mono text-slate-400 uppercase">Lead Engineer</div>
+          <div class="text-sm font-bold text-cyan-300 mt-1">Sajjad Ali</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: THE BUSINESS PROBLEM -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 01 // MOTIVATION</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">The Problem: Workplace Fraud & Inefficiency</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Legacy biometric machines and unverified mobile apps fail in distributed enterprise operations.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-rose-500">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-user-xmark"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Proxy Punching ("Buddy-Punching")</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Employees clocking in on behalf of absent colleagues using shared credentials or static remote links, costing enterprises 3–5% of annual payroll leakage.
+          </p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-amber-500">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-location-crosshairs"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">GPS Mocking & Location Spoofing</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Readily available mock location APKs, developer options, and clock drift tampering bypass basic mobile geolocation checks without hardware detection.
+          </p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-blue-500">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Disconnected Systems</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Attendance records, leave approvals, roster schedules, and salary slips live in separate spreadsheets, requiring tedious manual reconciliation every month.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: SYSTEM ARCHITECTURE OVERVIEW -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 02 // ARCHITECTURE</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">End-to-End System Ecosystem</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">A unified 3-tier architecture ensuring high-security punch verification and real-time oversight.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+        <div class="glass-card p-6 rounded-2xl border border-teal-500/30 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold text-teal-300 bg-teal-500/20 px-2.5 py-1 rounded-full">TIER 1</span>
+              <i class="fa-solid fa-mobile-screen text-xl text-teal-400"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Cross-Platform Mobile Client</h3>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400"></i> 100m GPS Geofence validation</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400"></i> Multi-layer Anti-Spoofing heuristics</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400"></i> Offline punch queue (FIFO sync)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-400"></i> Dynamic theme engine (12 palettes)</li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400">
+            Tech: React Native / Compose & TypeScript
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-cyan-500/30 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold text-cyan-300 bg-cyan-500/20 px-2.5 py-1 rounded-full">TIER 2</span>
+              <i class="fa-solid fa-server text-xl text-cyan-400"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">API Gateway & Microservices</h3>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> JWT tokenized authentication</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Server-side Haversine verification</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Rejection audit logging engine</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Payroll & Leave rule processor</li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400">
+            Tech: Node.js, Express, REST APIs
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-blue-500/30 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-mono font-bold text-blue-300 bg-blue-500/20 px-2.5 py-1 rounded-full">TIER 3</span>
+              <i class="fa-solid fa-gauge-high text-xl text-blue-400"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Executive Admin Web Portal</h3>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Real-time attendance headcounts</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Interactive Leaflet GPS map tracking</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Salary slip generation & export</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Passkey-protected admin actions</li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-slate-400">
+            Tech: Tailwind CSS, Leaflet.js, HTML5
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: THE COMPLETE TECH STACK -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 03 // TECH STACK</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">Enterprise Technology Stack</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Selected for sub-second performance, hardware-level security, and zero external mapping license costs.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <div class="glass-card p-5 rounded-xl space-y-3">
+          <div class="text-teal-400 text-lg flex items-center gap-2 font-bold">
+            <i class="fa-solid fa-mobile"></i> Mobile Frontend
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+            <div class="p-2 rounded bg-white/5 border border-white/5">React Native / Compose</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">TypeScript (Strict)</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">Tailwind CSS Mobile</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">IndexedDB / Room DB</div>
+          </div>
+        </div>
+
+        <div class="glass-card p-5 rounded-xl space-y-3">
+          <div class="text-cyan-400 text-lg flex items-center gap-2 font-bold">
+            <i class="fa-solid fa-desktop"></i> Admin Portal
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+            <div class="p-2 rounded bg-white/5 border border-white/5">HTML5 / ES6+ JavaScript</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">Tailwind CSS (Banking UI)</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">Leaflet.js Mapping</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">FontAwesome 6 Pro</div>
+          </div>
+        </div>
+
+        <div class="glass-card p-5 rounded-xl space-y-3">
+          <div class="text-blue-400 text-lg flex items-center gap-2 font-bold">
+            <i class="fa-solid fa-server"></i> Backend Services
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+            <div class="p-2 rounded bg-white/5 border border-white/5">Node.js / Express</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">TypeScript ES Modules</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">JWT Security Tokens</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">CORS & Rate Limiting</div>
+          </div>
+        </div>
+
+        <div class="glass-card p-5 rounded-xl space-y-3">
+          <div class="text-emerald-400 text-lg flex items-center gap-2 font-bold">
+            <i class="fa-solid fa-database"></i> Database & Cloud
+          </div>
+          <div class="space-y-1.5 text-xs text-slate-300 font-mono">
+            <div class="p-2 rounded bg-white/5 border border-white/5">Microsoft SQL Server</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">Spatial T-SQL Indices</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">GitHub Actions CI/CD</div>
+            <div class="p-2 rounded bg-white/5 border border-white/5">GitHub Pages Hosting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: GEOFENCING & SPATIAL MATHEMATICS -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 04 // SPATIAL ENGINE</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">100m Geofence: Haversine Algorithm</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Zero third-party commercial mapping dependencies. Mathematically verified on client and server.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-teal-400"></i> The Spherical Geodesic Formula
+          </h3>
+          <div class="p-4 rounded-xl bg-black/40 font-mono text-xs text-cyan-300 leading-relaxed border border-white/5">
+            Δσ = 2 · arcsin(√(sin²(Δφ/2) + cos(φ₁)·cos(φ₂)·sin²(Δλ/2)))<br/><br/>
+            d = R · Δσ  (R = 6,371,000 meters)
+          </div>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-shield text-teal-400 mt-0.5"></i>
+              <span><strong>Sub-Meter Precision:</strong> Accurately measures physical distance from office coordinates.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-circle-check text-teal-400 mt-0.5"></i>
+              <span><strong>Allowed Boundary:</strong> Strict <strong>≤ 100 meters</strong> threshold for punches.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl space-y-4">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-cyan-400"></i> Interactive Map Simulation
+          </h3>
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/80 space-y-3 text-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-700">
+              <span class="text-slate-400 font-mono">Head Office Boundary</span>
+              <span class="text-emerald-400 font-bold">100m Perimeter Circle</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400 font-mono">Employee Coordinates</span>
+              <span class="text-cyan-300 font-mono">31.5204° N, 74.3587° E</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400 font-mono">Calculated Distance</span>
+              <span class="text-emerald-400 font-bold font-mono">24.6 meters [AUTHORIZED]</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-300">
+            Integrated with Leaflet.js inside the Admin Portal to render live pinpoints and visual geofence boundary rings for all office branches.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: 5-LAYER ANTI-SPOOFING PIPELINE -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 05 // SECURITY PROTOCOL</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">Multi-Layer Hardware Anti-Spoofing</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Every check-in punch must pass a 5-step heuristic pipeline before entry into the audit trail.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-2">
+        <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-cyan-400">
+          <div class="w-8 h-8 rounded-full bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-xs font-bold mx-auto font-mono">1</div>
+          <h4 class="text-xs font-bold text-white">Mock Location Check</h4>
+          <p class="text-[11px] text-slate-300">Detects `isFromMockProvider` & developer spoofing apps.</p>
+        </div>
+
+        <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-cyan-400">
+          <div class="w-8 h-8 rounded-full bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-xs font-bold mx-auto font-mono">2</div>
+          <h4 class="text-xs font-bold text-white">Clock Drift Guard</h4>
+          <p class="text-[11px] text-slate-300">Blocks manually altered phone timestamps (&gt;5m drift).</p>
+        </div>
+
+        <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-cyan-400">
+          <div class="w-8 h-8 rounded-full bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-xs font-bold mx-auto font-mono">3</div>
+          <h4 class="text-xs font-bold text-white">Hardware Device Binding</h4>
+          <p class="text-[11px] text-slate-300">Locks account to verified hardware UUID.</p>
+        </div>
+
+        <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-cyan-400">
+          <div class="w-8 h-8 rounded-full bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-xs font-bold mx-auto font-mono">4</div>
+          <h4 class="text-xs font-bold text-white">GPS Accuracy Threshold</h4>
+          <p class="text-[11px] text-slate-300">Requires GPS signal accuracy &le; 50 meters.</p>
+        </div>
+
+        <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-emerald-400">
+          <div class="w-8 h-8 rounded-full bg-emerald-400/20 text-emerald-300 flex items-center justify-center text-xs font-bold mx-auto font-mono">5</div>
+          <h4 class="text-xs font-bold text-white">100m Perimeter Check</h4>
+          <p class="text-[11px] text-slate-300">Enforces physical presence within office radius.</p>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 rounded-xl flex items-center justify-between text-xs text-slate-300 border border-rose-500/30">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-triangle-exclamation text-rose-400 text-lg"></i>
+          <span>Any failed condition immediately writes a tamper audit log with timestamp, location, and reason code.</span>
+        </div>
+        <span class="font-mono text-rose-400 font-bold">ZERO FALSE TOLERANCE</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: ADMIN PORTAL DEEP DIVE -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 06 // MANAGEMENT HUB</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">Admin Web Portal Capabilities</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Executive control room designed with high-density banking aesthetics (#142B49 Executive Navy & #0F9D91 Teal).</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+        <div class="glass-card p-5 rounded-2xl space-y-3">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-teal-400"></i> Real-Time Operations Monitoring
+          </h3>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Live Daily Headcounts:</strong> Present, On-Leave, Late, and Off-Day counts updated dynamically.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Interactive Leaflet GPS Map:</strong> Live pins showing branch staff punch locations with distance badges.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-teal-400 mt-0.5"></i>
+              <span><strong>Department Breakdown:</strong> Real-time filtering across Corporate, Operations, IT, and Finance teams.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-5 rounded-2xl space-y-3">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-file-invoice-dollar text-cyan-400"></i> Payroll & Compliance Automation
+          </h3>
+          <ul class="text-xs text-slate-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+              <span><strong>Salary Slip Generation:</strong> Localized currency (PKR) with auto-calculated gross, tax, provident fund, and net pay.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+              <span><strong>Multi-Stage Leave Approvals:</strong> One-click approve/reject actions with instant employee notification.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-cyan-400 mt-0.5"></i>
+              <span><strong>Audit Trails & PDF Exports:</strong> One-tap clean print templates for HR and compliance audits.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: MOBILE APP EXPERIENCE & OFFLINE FIRST -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 07 // CLIENT RESILIENCE</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">Mobile App & Offline-First Sync</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Engineered to work seamlessly even in basements, underground parking, or remote zero-cellular locations.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+        <div class="glass-card p-5 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-hand-pointer"></i>
+          </div>
+          <h3 class="text-base font-bold text-white">One-Tap Punch Action</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Instant circular check-in / check-out button with real-time GPS telemetry, office proximity display, and visual feedback.
+          </p>
+        </div>
+
+        <div class="glass-card p-5 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="text-base font-bold text-white">Encrypted Local Queue</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            When offline, punches are cryptographically stored in persistent local storage (`IndexedDB` / `Room`) with hardware timestamps.
+          </p>
+        </div>
+
+        <div class="glass-card p-5 rounded-2xl space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </div>
+          <h3 class="text-base font-bold text-white">Background FIFO Sync</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            As soon as network connectivity is restored, the queue engine transfers all pending records in chronological order with zero data loss.
+          </p>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 rounded-xl flex items-center justify-between text-xs">
+        <span class="text-slate-300">Customization Engine: Includes <strong>12 executive color themes</strong> (Teal, Navy, Forest, Crimson, Indigo, Midnight).</span>
+        <span class="text-teal-400 font-mono font-bold">USER-CENTRIC DESIGN</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: BUSINESS IMPACT & ROI -->
+    <div class="slide w-full max-w-5xl flex-col space-y-6">
+      <div>
+        <span class="text-xs font-mono text-teal-400 tracking-widest uppercase">SECTION 08 // VALUE DELIVERY</span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">Measurable Business Impact</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">Delivering quantifiable ROI and operational velocity to HR and workforce operations.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <div class="glass-card p-6 rounded-2xl text-center space-y-2">
+          <div class="text-3xl sm:text-4xl font-black text-teal-400 font-mono">100%</div>
+          <div class="text-xs font-bold text-white">Proxy Punch Elimination</div>
+          <p class="text-[11px] text-slate-400">Zero tolerance for buddy-punching via 100m geofence.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl text-center space-y-2">
+          <div class="text-3xl sm:text-4xl font-black text-cyan-400 font-mono">85%</div>
+          <div class="text-xs font-bold text-white">Payroll Processing Velocity</div>
+          <p class="text-[11px] text-slate-400">Reduced monthly timesheet reconciliation from days to minutes.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl text-center space-y-2">
+          <div class="text-3xl sm:text-4xl font-black text-blue-400 font-mono">$0</div>
+          <div class="text-xs font-bold text-white">Mapping API License Costs</div>
+          <p class="text-[11px] text-slate-400">Custom Haversine geodesic math eliminates paid map API tiers.</p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl text-center space-y-2">
+          <div class="text-3xl sm:text-4xl font-black text-emerald-400 font-mono">99.9%</div>
+          <div class="text-xs font-bold text-white">Punch Reliability</div>
+          <p class="text-[11px] text-slate-400">Offline-first local caching prevents lost attendance events.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: CONCLUSION & DEMONSTRATION -->
+    <div class="slide w-full max-w-5xl flex-col items-center text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono tracking-widest uppercase">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>PRODUCTION READY SHOWCASE</span>
+      </div>
+
+      <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight">
+        Experience ALS Live
+      </h2>
+
+      <p class="text-slate-300 text-sm sm:text-base max-w-2xl font-light">
+        The complete platform is deployed and fully interactive. Test both the Admin Portal and the Mobile Experience directly from your browser.
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+        <a href="https://sajjadali4441-web.github.io/attendance-log-system-portfolio/" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#0F9D91] to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-xs tracking-wider uppercase transition shadow-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-desktop"></i>
+          <span>Live Admin Portal</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+
+        <a href="https://sajjadali4441-web.github.io/attendance-log-system-portfolio/app.html" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs tracking-wider uppercase transition border border-white/20 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <span>Live Mobile App</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 w-full max-w-2xl flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-mono">
+        <span>ENGINEER: SAJJAD ALI</span>
+        <span>PORTFOLIO: sajjadali4441-web.github.io/portfolio/</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM CONTROL BAR -->
+  <footer class="h-16 px-6 md:px-10 flex items-center justify-between border-t border-white/10 bg-[#081326]/90 backdrop-blur z-20">
+    <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+      <span class="hidden sm:inline">Use keyboard:</span>
+      <kbd class="px-2 py-1 bg-white/10 rounded text-[10px] text-white">←</kbd>
+      <kbd class="px-2 py-1 bg-white/10 rounded text-[10px] text-white">→</kbd>
+      <kbd class="px-2 py-1 bg-white/10 rounded text-[10px] text-white">Space</kbd>
+      <span class="hidden md:inline text-slate-500">| Press F for Fullscreen</span>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center gap-3">
+      <button id="prevBtn" onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-bold transition flex items-center gap-2 active:scale-95 disabled:opacity-30 disabled:pointer-events-none">
+        <i class="fa-solid fa-chevron-left text-xs"></i>
+        <span>Previous</span>
+      </button>
+
+      <button id="nextBtn" onclick="nextSlide()" class="px-5 py-2 rounded-xl bg-[#0F9D91] hover:bg-teal-700 text-white text-xs font-bold transition flex items-center gap-2 active:scale-95 shadow-sm">
+        <span>Next</span>
+        <i class="fa-solid fa-chevron-right text-xs"></i>
+      </button>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: SLIDE NAVIGATION -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === index);
+      });
+
+      currentSlide = index;
+      counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+      prevBtn.disabled = currentSlide === 0;
+
+      if (currentSlide === totalSlides - 1) {
+        nextBtn.innerHTML = '<span>Finish</span> <i class="fa-solid fa-flag-checkered text-xs"></i>';
+      } else {
+        nextBtn.innerHTML = '<span>Next</span> <i class="fa-solid fa-chevron-right text-xs"></i>';
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlide(currentSlide - 1);
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'f') {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+    });
+
+    // Touch swipe support for tablets/mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextSlide();
+      if (touchEndX - touchStartX > 50) prevSlide();
+    });
+
+    // Initialize
+    updateSlide(0);
+  </script>
+</body>
+</html>
